@@ -1,5 +1,6 @@
 package com.bignerdranch.android.cs4750_movieapp
 
+import com.bumptech.glide.Glide
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,18 +10,20 @@ import com.bignerdranch.android.cs4750_movieapp.databinding.ListItemGalleryBindi
 class MovieViewHolder(
     private val binding: ListItemGalleryBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(galleryItem: GalleryItem) {
         val imageUrl = "https://image.tmdb.org/t/p/w500${galleryItem.poster_path}"
+        Glide.with(binding.root.context)
+            .load(imageUrl)
+            .into(binding.imageView) // Replace with actual ImageView ID
     }
 }
 
 class MovieListAdapter(
     private val galleryItems: List<GalleryItem>
 ) : RecyclerView.Adapter<MovieViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MovieViewHolder {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemGalleryBinding.inflate(inflater, parent, false)
         return MovieViewHolder(binding)
