@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -47,6 +48,22 @@ class MovieAppFragment : Fragment() {
                 }
             }
         }
+
+        // SearchView listener
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    Log.d("SearchView", "Query submitted: $query")
+                    movieAppViewModel.searchMovies(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Optionally update suggestions dynamically
+                return false
+            }
+        })
     }
 
     override fun onDestroyView() {

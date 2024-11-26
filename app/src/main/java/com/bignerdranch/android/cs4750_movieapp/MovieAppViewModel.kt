@@ -20,6 +20,9 @@ class MovieAppViewModel : ViewModel() {
         get() = _galleryItems.asStateFlow()
 
     init {
+       fetchPopularMovies()
+    }
+    private fun fetchPopularMovies() {
         viewModelScope.launch {
             try {
                 val items = movieRepository.fetchMovies()
@@ -27,6 +30,18 @@ class MovieAppViewModel : ViewModel() {
                 _galleryItems.value = items
             } catch (ex: Exception) {
                 Log.e(TAG, "Failed to fetch gallery items", ex)
+            }
+        }
+    }
+
+    fun searchMovies(query: String) {
+        viewModelScope.launch {
+            try {
+                val searchResults = movieRepository.searchMovies(query)
+                Log.d(TAG, "Search results: $searchResults")
+                _galleryItems.value = searchResults
+            } catch (ex: Exception) {
+                Log.e(TAG, "Failed to search for movies", ex)
             }
         }
     }
