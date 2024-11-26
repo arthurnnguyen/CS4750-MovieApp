@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 data class GalleryItem(
     val id: Int,
     val title: String,
-    val poster_path: String
+    val poster_path: String?
     )
