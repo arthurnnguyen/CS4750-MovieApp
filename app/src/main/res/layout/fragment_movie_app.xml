@@ -14,7 +14,7 @@
 
     <!-- Movie Grid -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/photo_grid"
+        android:id="@+id/movieList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp" />

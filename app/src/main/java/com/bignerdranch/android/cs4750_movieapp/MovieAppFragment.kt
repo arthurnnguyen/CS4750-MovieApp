@@ -34,7 +34,7 @@ class MovieAppFragment : Fragment() {
     ): View {
         _binding =
             FragmentMovieAppBinding.inflate(inflater, container, false)
-        binding.photoGrid.layoutManager = GridLayoutManager(context, 3)
+        binding.movieList.layoutManager = GridLayoutManager(context, 3)
         return binding.root
     }
 
@@ -44,7 +44,7 @@ class MovieAppFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 movieAppViewModel.galleryItems.collect { items ->
-                    binding.photoGrid.adapter = MovieListAdapter(items)
+                    binding.movieList.adapter = MovieListAdapter(items)
                 }
             }
         }
@@ -64,6 +64,15 @@ class MovieAppFragment : Fragment() {
                 return false
             }
         })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                movieAppViewModel.galleryItems.collect { items ->
+                    // Update the RecyclerView with the new list of movies
+                    binding.movieList.adapter = MovieListAdapter(items)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
