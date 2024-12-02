@@ -2,6 +2,7 @@ package com.bignerdranch.android.cs4750_movieapp
 
 import android.util.Log
 import api.GalleryItem
+import api.MovieDetail
 import api.TMDBApi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -65,6 +66,18 @@ class MovieRepository {
         } catch (e: Exception) {
             Log.e("MovieRepository", "Error searching movies", e)
             emptyList()
+        }
+    }
+
+    suspend fun fetchMovieDetails(movieId: Int): MovieDetail? {
+        return try {
+            tmdbApi.getMovieDetails(
+                movieId = movieId,
+                apiKey = "e9a1665722447d1cfcba11b0f2032dee"
+            )
+        } catch (e: Exception) {
+            Log.e("MovieRepository", "Error fetching movie details", e)
+            null
         }
     }
 }
