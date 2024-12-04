@@ -33,7 +33,7 @@ class MovieListAdapter(
         val binding = ListItemMovieBinding.inflate(inflater, parent, false)
         return MovieViewHolder(binding).apply {
             itemView.setOnClickListener {
-              val position = adapterPosition
+                val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClicked(galleryItems[position].id)
                 }
@@ -47,3 +47,4 @@ class MovieListAdapter(
 
     override fun getItemCount() = galleryItems.size
 }
+
