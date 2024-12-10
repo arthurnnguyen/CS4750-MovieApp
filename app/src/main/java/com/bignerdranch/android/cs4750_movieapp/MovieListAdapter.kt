@@ -1,5 +1,6 @@
 package com.bignerdranch.android.cs4750_movieapp
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.bumptech.glide.Glide
 import android.view.LayoutInflater
@@ -28,12 +29,13 @@ class MovieListAdapter(
     private val onItemClicked: (Int) -> Unit
 ) : RecyclerView.Adapter<MovieViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemMovieBinding.inflate(inflater, parent, false)
         return MovieViewHolder(binding).apply {
             itemView.setOnClickListener {
-              val position = adapterPosition
+                val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClicked(galleryItems[position].id)
                 }
