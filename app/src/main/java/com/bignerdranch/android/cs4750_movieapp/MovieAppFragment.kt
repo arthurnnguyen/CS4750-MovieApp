@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bignerdranch.android.cs4750_movieapp.databinding.FragmentMovieAppBinding
 import kotlinx.coroutines.launch
@@ -44,7 +46,10 @@ class MovieAppFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 movieAppViewModel.galleryItems.collect { items ->
-                    binding.movieList.adapter = MovieListAdapter(items)
+                    binding.movieList.adapter = MovieListAdapter(items) {movieId ->
+                        val action = MovieAppFragmentDirections.showMovieDetail(movieId)
+                        findNavController().navigate(action)
+                    }
                 }
             }
         }
@@ -64,15 +69,6 @@ class MovieAppFragment : Fragment() {
                 return false
             }
         })
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                movieAppViewModel.galleryItems.collect { items ->
-                    // Update the RecyclerView with the new list of movies
-                    binding.movieList.adapter = MovieListAdapter(items)
-                }
-            }
-        }
     }
 
     override fun onDestroyView() {
