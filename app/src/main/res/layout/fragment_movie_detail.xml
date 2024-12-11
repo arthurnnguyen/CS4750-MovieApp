@@ -25,6 +25,30 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
+        <!-- Movie Tagline -->
+        <TextView
+            android:id="@+id/movieTagline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="Tagline" />
+
+        <!-- Movie Overview -->
+        <TextView
+            android:id="@+id/movieOverview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingTop="8dp"
+            android:visibility="gone" />
+
         <!-- Movie Rating -->
         <TextView
             android:id="@+id/movieRating"
@@ -39,12 +63,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
-        <!-- Movie Overview -->
+        <!-- Movie Genres -->
         <TextView
-            android:id="@+id/movieOverview"
+            android:id="@+id/movieGenres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="8dp"
+            android:text="Genres" />
+
+        <!-- Movie Production Companies -->
+        <TextView
+            android:id="@+id/movieProductionCompanies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Production Companies" />
+
+        <!-- Movie Runtime -->
+        <TextView
+            android:id="@+id/movieRuntime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Runtime" />
 
         <!-- Recommended Movies Title -->
         <TextView

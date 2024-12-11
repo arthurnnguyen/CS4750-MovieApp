@@ -2,6 +2,7 @@ package com.bignerdranch.android.cs4750_movieapp
 
 import RecommendedMoviesAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,9 +46,22 @@ class MovieDetailFragment : Fragment() {
         binding.movieTitle.text = movieDetail.title
         binding.movieRating.text = "Rating: ${movieDetail.vote_average}"
         binding.movieReleaseDate.text = "Release Date: ${movieDetail.release_date}"
+        binding.movieTagline.text = movieDetail.tagline
         binding.movieOverview.text = movieDetail.overview
+
         val imageUrl = "https://image.tmdb.org/t/p/w500${movieDetail.poster_path}"
         Glide.with(binding.root.context).load(imageUrl).into(binding.moviePoster)
+
+        // Handle genres
+        val genres = movieDetail.genres.joinToString(", ") { it.name }
+        binding.movieGenres.text = "Genres: $genres"
+
+        // Handle production companies
+        val productionCompanies = movieDetail.production_companies.joinToString(", ") { it.name }
+        binding.movieProductionCompanies.text = "Production Companies: $productionCompanies"
+
+        // Handle runtime
+        binding.movieRuntime.text = "Runtime: ${movieDetail.runtime} mins"
     }
 
     private fun fetchRecommendedMovies(movieId: Int) {
