@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import api.GalleryItem
+import api.MovieGenre
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +15,9 @@ private const val TAG = "MovieAppViewModel"
 class MovieAppViewModel : ViewModel() {
     private val movieRepository = MovieRepository()
 
+    private val _genres = MutableStateFlow<List<MovieGenre>>(emptyList())
+    val genres: StateFlow<List<MovieGenre>> get() = _genres
+
     private val _galleryItems: MutableStateFlow<List<GalleryItem>> =
         MutableStateFlow(emptyList())
     val galleryItems: StateFlow<List<GalleryItem>>
@@ -21,8 +25,9 @@ class MovieAppViewModel : ViewModel() {
 
     init {
        fetchPopularMovies()
+        fetchGenres()
     }
-    private fun fetchPopularMovies() {
+    fun fetchPopularMovies() {
         viewModelScope.launch {
             try {
                 val items = movieRepository.fetchMovies()
@@ -45,4 +50,27 @@ class MovieAppViewModel : ViewModel() {
             }
         }
     }
+
+    private fun fetchGenres() {
+        viewModelScope.launch {
+            try {
+                val genresList = movieRepository.fetchGenres()
+                _genres.value = genresList
+            } catch (ex: Exception) {
+                Log.e(TAG, "Failed to fetch genres", ex)
+            }
+        }
+    }
+    fun getMoviesByGenre(genreId: Int) {
+        viewModelScope.launch {
+            try {
+                val genreMovies = movieRepository.getMoviesByGenre(genreId)
+                Log.d(TAG, "Genre movies: $genreMovies")
+                _galleryItems.value = genreMovies
+            } catch (ex: Exception) {
+                Log.e(TAG, "Failed to fetch movies by genre", ex)
+            }
+        }
+    }
+
 }

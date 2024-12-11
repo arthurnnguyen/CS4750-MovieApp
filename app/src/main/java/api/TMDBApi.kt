@@ -36,5 +36,18 @@ interface TMDBApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): MovieResponse
+        @GET("discover/movie")
+        suspend fun getMoviesByGenre(
+            @Query("api_key") apiKey: String,
+            @Query("with_genres") genreId: Int,
+            @Query("language") language: String,
+            @Query("page") page: Int
+        ): MovieResponse
+
+    @GET("genre/movie/list")
+    suspend fun getGenres(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "en-US"
+    ): GenreResponse
 
 }
