@@ -1,11 +1,15 @@
 package com.bignerdranch.android.cs4750_movieapp
 
 import RecommendedMoviesAdapter
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +24,6 @@ class MovieDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val movieRepository = MovieRepository()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -41,7 +44,6 @@ class MovieDetailFragment : Fragment() {
             }
         }
     }
-
     private fun populateUI(movieDetail: MovieDetail) {
         binding.movieTitle.text = movieDetail.title
         binding.movieRating.text = "Rating: ${movieDetail.vote_average}"

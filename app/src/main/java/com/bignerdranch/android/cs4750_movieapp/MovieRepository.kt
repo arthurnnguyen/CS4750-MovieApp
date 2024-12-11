@@ -3,6 +3,7 @@ package com.bignerdranch.android.cs4750_movieapp
 import android.util.Log
 import api.GalleryItem
 import api.MovieDetail
+import api.MovieGenre
 import api.TMDBApi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -41,7 +42,6 @@ class MovieRepository {
             emptyList()
         }
     }
-
 
     suspend fun searchMovies(query: String): List<GalleryItem> {
         return try {
@@ -99,7 +99,37 @@ class MovieRepository {
         }
     }
 
+    suspend fun fetchGenres(): List<MovieGenre> {
+        return try {
+            val response = tmdbApi.getGenres(
+                apiKey = API_KEY,
+                language = "en-US"
+            )
+            response.genres // Return the genres from the response
+        } catch (e: Exception) {
+            Log.e("MovieRepository", "Error fetching genres", e)
+            emptyList()
+        }
+    }
 
+    // Fetch movies filtered by genre
+    suspend fun getMoviesByGenre(genreId: Int): List<GalleryItem> {
+        return try {
+            val response = tmdbApi.getMoviesByGenre(
+                apiKey = API_KEY,
+                genreId = genreId,
+                language = "en-US",
+                page = 1
+            )
+
+            response.results.map { movie ->
+                GalleryItem(id = movie.id, title = movie.title, poster_path = movie.poster_path ?: "")
+            }
+        } catch (e: Exception) {
+            Log.e("MovieRepository", "Error fetching movies by genre", e)
+            emptyList()
+        }
+    }
 
 }
 
