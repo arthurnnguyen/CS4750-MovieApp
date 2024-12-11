@@ -29,4 +29,12 @@ interface TMDBApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String = "en-US"
     ): MovieDetail
+
+    @GET("movie/{movieId}/recommendations")
+    suspend fun getRecommendedMovies(
+        @Path("movieId") movieId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): MovieResponse
+
 }

@@ -10,7 +10,7 @@ import retrofit2.create
 
 class MovieRepository {
     private val tmdbApi: TMDBApi
-
+    private val API_KEY = "e9a1665722447d1cfcba11b0f2032dee"
     init {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
@@ -80,5 +80,26 @@ class MovieRepository {
             null
         }
     }
+
+    suspend fun fetchRecommendedMovies(movieId: Int): List<GalleryItem> {
+        return try {
+            val response = tmdbApi.getRecommendedMovies(
+                movieId = movieId,
+                apiKey = API_KEY,
+                language = "en-US"
+            )
+            if (response.results.isNotEmpty()) {
+                response.results // This should directly return the list of GalleryItems
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            Log.e("MovieRepository", "Error fetching recommended movies", e)
+            emptyList()
+        }
+    }
+
+
+
 }
 

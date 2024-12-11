@@ -49,3 +49,4 @@ class MovieListAdapter(
 
     override fun getItemCount() = galleryItems.size
 }
+

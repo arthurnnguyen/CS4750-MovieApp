@@ -1,17 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+
+        <!-- Movie Poster Image -->
         <ImageView
             android:id="@+id/moviePoster"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/movie_poster_description" />
+
+        <!-- Movie Title -->
         <TextView
             android:id="@+id/movieTitle"
             android:layout_width="match_parent"
@@ -19,20 +24,86 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
+
+        <!-- Movie Tagline -->
         <TextView
-            android:id="@+id/movieRating"
+            android:id="@+id/movieTagline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-        <TextView
-            android:id="@+id/movieReleaseDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="Tagline" />
+
+        <!-- Movie Overview -->
         <TextView
             android:id="@+id/movieOverview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingTop="8dp"
+            android:visibility="gone" />
+
+        <!-- Movie Rating -->
+        <TextView
+            android:id="@+id/movieRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <!-- Movie Release Date -->
+        <TextView
+            android:id="@+id/movieReleaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <!-- Movie Genres -->
+        <TextView
+            android:id="@+id/movieGenres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Genres" />
+
+        <!-- Movie Production Companies -->
+        <TextView
+            android:id="@+id/movieProductionCompanies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Production Companies" />
+
+        <!-- Movie Runtime -->
+        <TextView
+            android:id="@+id/movieRuntime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Runtime" />
+
+        <!-- Recommended Movies Title -->
+        <TextView
+            android:id="@+id/recommendedMoviesTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recommended_movies_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+
+        <!-- Recommended Movies RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommendedMoviesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal" />
+
     </LinearLayout>
 </ScrollView>
